@@ -123,7 +123,7 @@ var hid = new function() {
      * @param event
      * @param callback
      */
-    this.bindPointer = function(event, callback) {
+    this.bindPointer = function(event, objectFilter, callback) {
         if (pointer.binds.hasOwnProperty(event)) {
             pointer.binds[event].append(callback);
         } else console.log("No such event \"" + event + "\" for pointer.binds")
@@ -146,6 +146,9 @@ var hid = new function() {
         }
     };
 
+    /**
+     * Human input device initialization.
+     */
     this.initialize = function() {
 
         var blockEvent = function(e) {
@@ -157,8 +160,12 @@ var hid = new function() {
             }
         };
 
+        var fixEvent = function(e) {
+            return e || window.event;
+        };
+
         this.bindBrowserEvent('touchstart', document, function(e){
-            e = e || window.event;
+            e = fixEvent(e);
             var target = e.target || e.srcElement;
             blockEvent(e);
             handlers.pointStart(e.touches[e.touches.length - 1].identifier, e.touches[e.touches.length - 1].pageX,
@@ -167,7 +174,7 @@ var hid = new function() {
         });
 
         this.bindBrowserEvent('touchmove', document, function(e){
-            e = e || window.event;
+            e = fixEvent(e);
             blockEvent(e);
             e.changedTouches.foreach(function(el) {
                 handlers.pointMove(this[el].identifier, this[el].pageX, this[el].pageY);
@@ -176,7 +183,7 @@ var hid = new function() {
         });
 
         this.bindBrowserEvent('touchend', document, function(e){
-            e = e || window.event;
+            e = fixEvent(e);
             blockEvent(e);
             e.changedTouches.foreach(function(el) {
                 handlers.pointEnd(this[el].identifier, this[el].pageX, this[el].pageY);
@@ -185,18 +192,18 @@ var hid = new function() {
         });
 
         this.bindBrowserEvent('mousedown', document, function(e){
-            if (!e) e = window.event;
+            e = fixEvent(e);
             var target = e.target || e.toElement;
             handlers.pointStart(1, e.pageX, e.pageY, target)
         });
 
         this.bindBrowserEvent('mouseup', document, function(e){
-            if (!e) e = window.event;
+            e = fixEvent(e);
             handlers.pointEnd(1, e.pageX, e.pageY)
         });
 
         this.bindBrowserEvent('mousemove', document, function(e){
-            if (!e) e = window.event;
+            e = fixEvent(e);
             handlers.pointMove(1, e.pageX, e.pageY)
         });
 
