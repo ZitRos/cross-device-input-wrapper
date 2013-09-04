@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Cross-device input demo page</title>
+    <script type="text/javascript" src="../basic.js"></script>
+    <script type="text/javascript" src="../hid.js"></script>
+    <script type="text/javascript" src="test.js"></script>
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background: #eeedc8;
+        }
+
+        circle {
+            stroke-width: 1px;
+            stroke: rgba(0, 0, 0, 0.50);
+            fill: #c2eaea;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="info">
+
+    </div>
+
+    <svg width="100%" height="100%">
+        <g id="net-scene">
+            <circle class="node" cx="200" cy="400" r="50"></circle>
+            <circle class="node" cx="600" cy="100" r="50"></circle>
+            <circle class="node" cx="500" cy="500" r="50"></circle>
+            <circle class="node" cx="100" cy="300" r="50"></circle>
+            <circle class="node" cx="100" cy="100" r="50"></circle>
+        </g>
+    </svg>
+
+    <script type="text/javascript">
+        hid.initialize()
+    </script>
+</body>
+
+</html>
