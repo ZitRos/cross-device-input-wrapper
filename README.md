@@ -1,7 +1,8 @@
 cross-device-input-wrapper
 ==========================
 
-Human input device centralizer - a javascript object
+Human input device centralizer - a javascript object.
+Visit <a href="http://zitros.github.io/cross-device-input-wrapper">demo page</a> to discover how it works.
 
 ### Files
 
