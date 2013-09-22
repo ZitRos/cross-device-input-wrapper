@@ -1,4 +1,4 @@
-hid.bindPointer("move", document, function(e) {
+hid.bind("pointerMove", document, function(e) {
 
     if (e.target && e.target.tagName === "circle") {
         e.target.setAttribute("cx", e.x);
